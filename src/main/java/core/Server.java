@@ -15,15 +15,21 @@ public class Server {
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
 
-    public void boot() throws IOException, ClassNotFoundException {
+    public void boot() throws IOException {
         inetAddress = InetAddress.getLocalHost();
         serverSocket = new ServerSocket(5555);
-
-        listen();
     }
 
-    private void listen() throws IOException, ClassNotFoundException {
-        while (true){
+    public void monitor() throws IOException, ClassNotFoundException {
+        while (true) {
+            openStreams();
+            System.out.println(read());
+            closeStreams();
+        }
+    }
+
+    public void repeat() throws IOException, ClassNotFoundException {
+        while (true) {
             openStreams();
             send(read());
             closeStreams();
