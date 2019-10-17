@@ -16,6 +16,7 @@ public class Server {
     private ObjectOutputStream objectOutputStream;
 
     public void boot() throws IOException {
+        System.out.println("Server listening for socket connections on localhost:5555");
         inetAddress = InetAddress.getLocalHost();
         serverSocket = new ServerSocket(5555);
     }
@@ -53,6 +54,7 @@ public class Server {
     }
 
     private String read() throws IOException, ClassNotFoundException {
+        System.out.println("Packet received");
         return (String) objectInputStream.readObject();
     }
 
